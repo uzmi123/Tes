@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Riset Microstock - Riset Yang Benar, Hasil Nyata</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royal: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7c3aed',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg-primary: #0f0a1a;
+            --bg-secondary: #1a1028;
+            --bg-card: #241638;
+            --accent: #a855f7;
+            --accent-light: #c084fc;
+            --gold: #fbbf24;
+            --text-primary: #ffffff;
+            --text-secondary: #d4c4e8;
+            --text-muted: #9a8ab0;
+            --border: #3d2a5c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Background Effects */
+        .hero-bg {
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .section-glow {
+            background: 
+                radial-gradient(ellipse 100% 60% at 50% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 60%),
+                var(--bg-secondary);
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(36, 22, 56, 0.8) 0%, rgba(26, 16, 40, 0.9) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #f59e0b 50%, var(--gold) 100%);
+            background-size: 200% 100%;
+            color: #1a1028 !important;
+            font-weight: 700;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.4);
+            background-position: 100% 0;
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            color: var(--text-primary) !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.5) 0%, rgba(139, 92, 246, 0.4) 100%);
+            border-color: rgba(168, 85, 247, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-video {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.2) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: var(--text-primary) !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+        }
+
+        .btn-video:hover {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.5) 0%, rgba(220, 38, 38, 0.4) 100%);
+            border-color: rgba(239, 68, 68, 0.8);
+            transform: translateY(-2px);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 0; }
+            50% { background-position: 100% 0; }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Floating Elements Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .float-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.6); }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        /* Price Strike */
+        .price-strike {
+            position: relative;
+        }
+
+        .price-strike::after {
+            content: '';
+            position: absolute;
+            left: -5%;
+            top: 50%;
+            width: 110%;
+            height: 3px;
+            background: #ef4444;
+            transform: rotate(-8deg);
+        }
+
+        /* Sticky CTA Mobile */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-cta.visible {
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            .sticky-cta {
+                display: none;
+            }
+        }
+
+        /* Noise Texture */
+        .noise-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        /* Countdown */
+        .countdown-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.3) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Comparison Table */
+        .comparison-highlight {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+
+        /* Focus States */
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* FAQ Accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        /* Proof Badge */
+        .proof-badge {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(22, 163, 74, 0.3) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        /* Image Grid */
+        .image-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        /* Image Hover */
+        .img-hover {
+            transition: transform 0.3s ease;
+        }
+
+        .img-hover:hover {
+            transform: scale(1.02);
+        }
+
+        /* Platform List */
+        .platform-tag {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-bg relative noise-overlay min-h-screen flex items-center py-16 px-4">
+        <div class="absolute top-20 right-4 w-32 h-32 bg-royal-500/20 rounded-full blur-3xl float-element"></div>
+        <div class="absolute bottom-40 left-4 w-24 h-24 bg-gold-500/10 rounded-full blur-2xl float-element" style="animation-delay: -2s;"></div>
+        
+        <div class="w-full max-w-lg mx-auto relative z-10">
+            <!-- Badge -->
+            <div class="reveal inline-flex items-center gap-2 bg-royal-500/20 border border-royal-500/40 rounded-full px-4 py-2 mb-6">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="text-sm text-royal-200 font-medium">Untuk Microstocker Serius</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="reveal font-display text-4xl sm:text-5xl font-bold leading-tight mb-6" style="animation-delay: 0.1s;">
+                Udah Ribuan Item di Portfolio,
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-royal-300 via-royal-400 to-gold-400"> Tapi Dollars Gak Kunjung Datang?</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="reveal text-lg text-royal-200 mb-8 leading-relaxed" style="animation-delay: 0.2s;">
+                Bukan soal <em>jumlah item</em>. Tapi soal <strong class="text-white">item apa yang sebenarnya dicari market</strong>. Data Riset Microstock membuka insight yang selama ini kamu tebak-tebakan.
+            </p>
+
+            <!-- Hero Product Image -->
+            <div class="reveal mb-8 relative" style="animation-delay: 0.3s;">
+                <div class="absolute -inset-4 bg-gradient-to-r from-royal-500/20 to-gold-500/20 rounded-2xl blur-xl"></div>
+                <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/Data%20Riset%20Box%20Fix.jpg" alt="Data Riset Microstock Package" class="relative rounded-xl w-full border border-royal-500/30 shadow-2xl">
+                <div class="absolute -bottom-3 -right-3 bg-gold-500 text-gray-900 font-bold px-4 py-2 rounded-lg text-sm">
+                    Updated 2026
+                </div>
+            </div>
+
+            <!-- Hero CTA -->
+            <div class="reveal space-y-3" style="animation-delay: 0.4s;">
+                <a href="#pricing" class="btn-primary block text-center py-4 px-8 rounded-xl text-lg font-bold">
+                    Lihat Penawaran Spesial
+                </a>
+                <a href="https://t.me/memberkeko" target="_blank" class="btn-secondary block text-center py-4 px-8 rounded-xl text-lg font-bold">
+                    Lihat Kata Mereka
+                </a>
+                <a href="https://youtube.com/shorts/IIRArGMieEk?feature=share" target="_blank" class="btn-video block text-center py-4 px-8 rounded-xl text-lg font-bold">
+                    <svg class="inline w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Video Penjelasan Data Riset
+                </a>
+                <p class="text-center text-sm text-royal-300 pt-2">
+                    <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Akses instan setelah pembayaran
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section-glow py-16 px-4">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-12">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">Masalah Yang Kamu Hadapi</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Kenapa Portfolio Kamu Sepi?</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Problem Cards -->
+                <div class="reveal glass-card rounded-xl p-5 border-l-4 border-l-red-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Upload Tanpa Arah</h3>
+                            <p class="text-sm text-royal-300">Setiap hari asal nyetok item, berharap ada yang beli. Tapi tidak tahu item apa yang sebenarnya dicari.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal glass-card rounded-xl p-5 border-l-4 border-l-orange-500" style="animation-delay: 0.1s;">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Item Banyak, Download Sedikit</h3>
+                            <p class="text-sm text-royal-300">Sudah punya ratusan item di portfolio, tapi statistik download tidak sebanding dengan effort yang dikeluarkan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal glass-card rounded-xl p-5 border-l-4 border-l-yellow-500" style="animation-delay: 0.2s;">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Jarang Payout, Belum Rasakan Dollar</h3>
+                            <p class="text-sm text-royal-300">Rajin upload tapi jarang mencapai threshold payout. Bahkan ada yang belum pernah merasakan dollars dari microstock.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal glass-card rounded-xl p-5 border-l-4 border-l-purple-500" style="animation-delay: 0.3s;">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Tebak-Tebakan Tanpa Data</h3>
+                            <p class="text-sm text-royal-300">Tidak ada riset yang jelas. Hanya mengandalkan feeling dan intuisi tanpa tahu tren pasar yang sebenarnya.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transition Statement -->
+            <div class="reveal mt-12 text-center">
+                <p class="text-royal-200 text-lg">
+                    <span class="text-white font-semibold">Kamu tidak sendirian.</span> Banyak microstocker mengalami hal yang sama. Yang membedakan adalah mereka yang mulai <span class="text-royal-300">menggunakan data valid untuk mulai nyetok item di situs microstock.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bukti Penarikan Dollars Section -->
+    <section class="py-16 px-4 bg-[var(--bg-secondary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-8">
+                <div class="inline-flex items-center gap-2 proof-badge rounded-full px-4 py-2 mb-4">
+                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-sm text-green-300 font-medium">Bukti Nyata</span>
+                </div>
+                <h2 class="font-display text-3xl font-bold">Payout Dollars dari Microstock</h2>
+                <p class="text-royal-300 mt-2">Ini bukan teori. Ini hasil yang sudah dibuktikan.</p>
+            </div>
+
+            <!-- Dollar Proof Grid -->
+            <div class="reveal image-grid-2 gap-3">
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/dollars%201.png" alt="Bukti Penarikan Dollars 1" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/dollars%202.png" alt="Bukti Penarikan Dollars 2" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/dollars%203.png" alt="Bukti Penarikan Dollars 3" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/dollars%204.png" alt="Bukti Penarikan Dollars 4" class="w-full h-auto img-hover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-16 px-4 bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-8">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">Testimoni Member</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Apa Kata Mereka?</h2>
+                <p class="text-royal-300 mt-2">Feedback langsung dari member yang sudah merasakan manfaatnya</p>
+            </div>
+
+            <!-- Testimonial Grid -->
+            <div class="reveal image-grid-2 gap-3">
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%201.png" alt="Testimoni Member 1" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%202.png" alt="Testimoni Member 2" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%203.png" alt="Testimoni Member 3" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%204.png" alt="Testimoni Member 4" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%205.png" alt="Testimoni Member 5" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%206.png" alt="Testimoni Member 6" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%207.png" alt="Testimoni Member 7" class="w-full h-auto img-hover">
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden border border-royal-500/30">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/testi%208.png" alt="Testimoni Member 8" class="w-full h-auto img-hover">
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="reveal grid grid-cols-3 gap-4 mt-10">
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div class="font-display text-2xl font-bold text-gold-400">2000+</div>
+                    <div class="text-xs text-royal-300 mt-1">Member Aktif</div>
+                </div>
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div class="font-display text-2xl font-bold text-gold-400">16+</div>
+                    <div class="text-xs text-royal-300 mt-1">Situs Microstock</div>
+                </div>
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div class="font-display text-xl font-bold text-gold-400">LIFETIME</div>
+                    <div class="text-xs text-royal-300 mt-1">Update Data</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="py-16 px-4 bg-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">Perbandingan</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Sebelum vs Sesudah Pakai Data Riset</h2>
+            </div>
+
+            <div class="reveal space-y-6">
+                <!-- Before -->
+                <div class="glass-card rounded-xl p-5 border-l-4 border-l-red-500">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                        <span class="font-semibold text-red-300">Sebelum (Tebak-Tebakan)</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-royal-300">
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>
+                            Upload berdasarkan feeling dan intuisi
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>
+                            Spending jam berjam-jam untuk riset manual
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>
+                            Banyak item dengan download rendah
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-red-400 rounded-full"></span>
+                            Tidak tahu tren yang sedang naik
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- After -->
+                <div class="glass-card rounded-xl p-5 border-l-4 border-l-green-500 comparison-highlight">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span class="font-semibold text-green-300">Sesudah (Berbasis Data)</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-royal-200">
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                            Upload item dengan demand terbukti tinggi
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                            Riset lengkap dalam hitungan menit
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                            Fokus pada kategori dengan conversion rate tinggi
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                            Tahu timing upload yang optimal
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside Section -->
+    <section class="py-16 px-4 bg-[var(--bg-secondary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">Isi Paket</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Apa Saja Yang Kamu Dapatkan?</h2>
+            </div>
+
+            <div class="reveal space-y-4">
+                <div class="glass-card rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-royal-500 to-royal-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1">Database Keyword Trending</h3>
+                        <p class="text-sm text-royal-300">Ribuan keyword dengan volume pencarian tinggi dan kompetisi rendah di berbagai platform microstock.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gold-500 to-gold-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1">Analisis Kategori Profitable</h3>
+                        <p class="text-sm text-royal-300">Breakdown kategori dengan rasio demand/supply terbaik yang bisa kamu eksploitasi sekarang.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1">Gap Market Analysis</h3>
+                        <p class="text-sm text-royal-300">Identifikasi celah market yang belum banyak disentuh kompetitor dengan potensi tinggi.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1">Video Tutorial Akses</h3>
+                        <p class="text-sm text-royal-300">Panduan lengkap cara menggunakan data riset untuk strategi upload yang efektif.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team/Instructor Section -->
+    <section class="py-16 px-4 bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">Di Balik Riset</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Kenalan Dengan Mentormu</h2>
+            </div>
+
+            <div class="reveal glass-card rounded-2xl p-6 text-center">
+                <div class="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-4 border-royal-500/50">
+                    <img src="https://raw.githubusercontent.com/ekodwilistianto/testimonimember/main/foto%20mentor.png" alt="Eko Dwi Listianto" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-display text-xl font-bold mb-1">Eko Dwi Listianto</h3>
+                <p class="text-sm text-gold-400 mb-3">Microstocker & Digipreneur</p>
+                <p class="text-sm text-royal-200">
+                    Aku akan bantu kamu untuk bisa memanfaatkan dunia digital sebagai sumber penghasilan <span class="text-gold-400">#DariRumahAja</span> baik dari luar negeri ataupun dalam negeri.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-16 px-4 bg-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">Alur Kerja</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Cara Menggunakan Data Riset</h2>
+            </div>
+
+            <div class="reveal space-y-6">
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-0 w-8 h-8 bg-royal-500 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                    <div class="absolute left-[15px] top-8 w-0.5 h-full bg-royal-500/30"></div>
+                    <div class="glass-card rounded-xl p-4">
+                        <h3 class="font-semibold mb-1">Akses Dashboard</h3>
+                        <p class="text-sm text-royal-300">Setelah pembelian, langsung dapat akses ke dashboard riset yang sudah terorganisir.</p>
+                    </div>
+                </div>
+
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-0 w-8 h-8 bg-royal-500 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                    <div class="absolute left-[15px] top-8 w-0.5 h-full bg-royal-500/30"></div>
+                    <div class="glass-card rounded-xl p-4">
+                        <h3 class="font-semibold mb-1">Eksekusi Visual Referensi Dengan Traffic Terbaik</h3>
+                        <p class="text-sm text-royal-300">Bukan sekedar tema umum, tapi presisi langsung ke visual dan angka traffic yang real dicari oleh market.</p>
+                    </div>
+                </div>
+
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-0 w-8 h-8 bg-royal-500 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                    <div class="absolute left-[15px] top-8 w-0.5 h-full bg-royal-500/30"></div>
+                    <div class="glass-card rounded-xl p-4">
+                        <h3 class="font-semibold mb-1">Rencanakan Produksi</h3>
+                        <p class="text-sm text-royal-300">Buat production plan berdasarkan data demand yang ada.</p>
+                    </div>
+                </div>
+
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-0 w-8 h-8 bg-gold-500 rounded-full flex items-center justify-center text-gray-900 font-bold text-sm">4</div>
+                    <div class="glass-card rounded-xl p-4 border-gold-500/30">
+                        <h3 class="font-semibold mb-1">Upload & Konsultasi</h3>
+                        <p class="text-sm text-royal-300">Eksekusi upload dan konsultasikan strategimu langsung ke mentor via WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+    <section class="py-16 px-4 bg-[var(--bg-secondary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-gold-400 font-semibold text-sm uppercase tracking-wider">Bonus Spesial</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Kamu Juga Mendapatkan</h2>
+            </div>
+
+            <div class="reveal space-y-4">
+                <div class="glass-card rounded-xl p-5 border border-gold-500/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gold-500 text-gray-900 text-xs font-bold px-3 py-1 rounded-bl-lg">BONUS</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Akses Chat Mentor 1-on-1</h3>
+                            <p class="text-sm text-royal-300">Tanya jawab langsung via WhatsApp dengan mentor untuk konsultasi strategi microstock kamu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-5 border border-gold-500/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gold-500 text-gray-900 text-xs font-bold px-3 py-1 rounded-bl-lg">BONUS</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Update Data Berkala</h3>
+                            <p class="text-sm text-royal-300">Data riset akan di-update secara berkala mengikuti perubahan tren market.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-5 border border-gold-500/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gold-500 text-gray-900 text-xs font-bold px-3 py-1 rounded-bl-lg">BONUS</div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white mb-1">Akses Grup Eksklusif</h3>
+                            <p class="text-sm text-royal-300">Bergabung dengan komunitas microstocker untuk sharing dan networking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="py-16 px-4 bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal glass-card rounded-2xl p-6 text-center border border-green-500/30">
+                <div class="w-16 h-16 mx-auto mb-4 bg-green-500/20 rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3 class="font-display text-xl font-bold mb-2">Garansi Akses & Support</h3>
+                <p class="text-sm text-royal-200 mb-4">
+                    Jika kamu mengalami kendala akses atau ada pertanyaan tentang data riset, tim support dan mentor siap membantu. Kepuasan kamu adalah prioritas kami.
+                </p>
+                <div class="flex items-center justify-center gap-4 text-sm">
+                    <div class="flex items-center gap-1 text-green-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span>Akses Cepat</span>
+                    </div>
+                    <div class="flex items-center gap-1 text-green-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span>Support Responsif</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 px-4 bg-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-royal-400 font-semibold text-sm uppercase tracking-wider">FAQ</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Pertanyaan Yang Sering Diajukan</h2>
+            </div>
+
+            <div class="reveal space-y-3" id="faq-container">
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button class="w-full p-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-sm">Bagaimana cara akses setelah bayar?</span>
+                        <svg class="faq-icon w-5 h-5 text-royal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-sm text-royal-300">Setelah pembayaran berhasil, kamu akan mendapat link akses otomatis ke dashboard riset. Prosesnya instan dan tidak perlu menunggu konfirmasi manual.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button class="w-full p-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-sm">Apa bedanya dengan riset gratis di internet?</span>
+                        <svg class="faq-icon w-5 h-5 text-royal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-sm text-royal-300">Data riset ini dikurasi dari analisis mendalam berbagai platform microstock menggunakan tools profesional dan berbayar yang terlisensi secara international serta dipakai oleh perusahaan kelas dunia. Kamu mendapatkan insight yang actionable plus dukungan mentor untuk implementasinya.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button class="w-full p-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-sm">Apakah harganya sebanding dengan nilai yang didapat?</span>
+                        <svg class="faq-icon w-5 h-5 text-royal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-sm text-royal-300">Dengan harga promo, kamu mendapatkan akses data riset lengkap + bonus konsultasi 1-on-1. Satu insight yang tepat bisa menghasilkan ROI berkali-kali lipat dari investasi yang kamu keluarkan.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button class="w-full p-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-sm">Bagaimana jika mentor tidak responsif?</span>
+                        <svg class="faq-icon w-5 h-5 text-royal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-sm text-royal-300">Mentor berkomitmen untuk merespons pertanyaan dalam waktu 1x24 jam. Jika ada kendala, kamu bisa menghubungi support dan kami akan memastikan pertanyaan kamu terjawab.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card rounded-xl overflow-hidden">
+                    <button class="w-full p-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-sm">Platform microstock apa saja yang dicover?</span>
+                        <svg class="faq-icon w-5 h-5 text-royal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-sm text-royal-300 mb-3">Data riset mencakup platform utama berikut:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Adobe Stock</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Shutterstock</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Freepik</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Creative Fabrica</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">123RF</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Arabstock</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Dreamstime</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Getty Images</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Iconscout</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Zedge</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Pond5</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Vecteezy</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Wirestock</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">TurboSquid</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">Pikbest</span>
+                            <span class="platform-tag text-xs px-2 py-1 rounded text-royal-200">dan lainnya</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scarcity Section -->
+    <section class="py-12 px-4 bg-[var(--bg-secondary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal countdown-box rounded-xl p-5 text-center">
+                <div class="flex items-center justify-center gap-2 mb-3">
+                    <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="font-semibold text-red-300">Harga Akan Naik Segera</span>
+                </div>
+                <p class="text-sm text-royal-200 mb-3">
+                    Penawaran harga promo terbatas. Setelah periode ini berakhir, harga akan kembali ke Rp 555.000.
+                </p>
+                <div class="flex justify-center gap-3" id="countdown">
+                    <div class="bg-[var(--bg-card)] rounded-lg px-4 py-2 min-w-[60px]">
+                        <div class="font-display text-2xl font-bold text-white" id="days">02</div>
+                        <div class="text-xs text-royal-300">Hari</div>
+                    </div>
+                    <div class="bg-[var(--bg-card)] rounded-lg px-4 py-2 min-w-[60px]">
+                        <div class="font-display text-2xl font-bold text-white" id="hours">14</div>
+                        <div class="text-xs text-royal-300">Jam</div>
+                    </div>
+                    <div class="bg-[var(--bg-card)] rounded-lg px-4 py-2 min-w-[60px]">
+                        <div class="font-display text-2xl font-bold text-white" id="minutes">37</div>
+                        <div class="text-xs text-royal-300">Menit</div>
+                    </div>
+                    <div class="bg-[var(--bg-card)] rounded-lg px-4 py-2 min-w-[60px]">
+                        <div class="font-display text-2xl font-bold text-white" id="seconds">52</div>
+                        <div class="text-xs text-royal-300">Detik</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 px-4 bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)]">
+        <div class="w-full max-w-lg mx-auto">
+            <div class="reveal text-center mb-10">
+                <span class="text-gold-400 font-semibold text-sm uppercase tracking-wider">Penawaran Terbatas</span>
+                <h2 class="font-display text-3xl font-bold mt-2">Investasi Untuk Masa Depan Microstockmu</h2>
+            </div>
+
+            <!-- Pricing Card -->
+            <div class="reveal glass-card rounded-2xl p-6 border-2 border-gold-500/50 relative overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 bg-gold-500 text-gray-900 text-center text-xs font-bold py-1">
+                    PROMO TERBATAS
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-royal-300 mb-2">Harga Normal</p>
+                    <div class="price-strike inline-block font-display text-2xl text-royal-400 mb-2">Rp 555.000</div>
+                    
+                    <p class="text-sm text-gold-400 mb-1">Harga Hari Ini</p>
+                    <div class="font-display text-5xl font-bold text-white mb-2">Rp 355.000</div>
+                    <p class="text-xs text-royal-300 mb-6">Hemat Rp 200.000 (36%)</p>
+
+                    <a href="https://ekodwilistianto.com/ekodwi.id/xp5oj89kwx98/checkout?token=cGFyYW1zPSU1QiU1RCZiaWRfcHJpY2U9MCZxdHlfcHJvZD0x" class="btn-primary block text-center py-4 px-8 rounded-xl text-lg font-bold mb-4" target="_blank">
+                        Beli Sekarang
+                    </a>
+
+                    <div class="flex items-center justify-center gap-4 text-xs text-royal-300 mb-4">
+                        <div class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            <span>Pembayaran Aman</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <span>Akses Instan</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="pt-4 border-t border-royal-500/20">
+                        <p class="text-xs text-royal-300 mb-2">Metode Pembayaran:</p>
+                        <div class="flex justify-center gap-2 text-xs text-royal-400">
+                            <span class="bg-royal-500/20 px-2 py-1 rounded">QRIS</span>
+                            <span class="bg-royal-500/20 px-2 py-1 rounded">Transfer Bank</span>
+                            <span class="bg-royal-500/20 px-2 py-1 rounded">E-Wallet</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Micro-copy -->
+            <div class="reveal mt-6 text-center">
+                <p class="text-xs text-royal-400">
+                    <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Transaksi diproses melalui Lynk.id yang terpercaya dan aman.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-16 px-4 bg-[var(--bg-secondary)] relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-royal-900/20 to-transparent"></div>
+        <div class="w-full max-w-lg mx-auto relative z-10">
+            <div class="reveal text-center">
+                <h2 class="font-display text-2xl font-bold mb-4">Masih Ragu?</h2>
+                <p class="text-royal-200 mb-6">
+                    Pikirkan berapa banyak waktu yang sudah kamu habiskan untuk riset manual. Berapa banyak item yang sudah kamu upload tapi sepi. Dengan investasi kecil ini, kamu bisa menghemat waktu dan mulai fokus pada item yang benar-benar berpotensi.
+                </p>
+                <a href="https://ekodwilistianto.com/ekodwi.id/xp5oj89kwx98/checkout?token=cGFyYW1zPSU1QiU1RCZiaWRfcHJpY2U9MCZxdHlfcHJvZD0x" class="btn-primary inline-block text-center py-4 px-10 rounded-xl text-lg font-bold" target="_blank">
+                    Ambil Sekarang
+                </a>
+                <p class="mt-4 text-xs text-royal-400">
+                    Akses instan setelah pembayaran berhasil
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copyright -->
+    <div class="py-6 px-4 bg-[var(--bg-primary)] text-center">
+        <p class="text-xs text-royal-500">
+            &copy; 2025 Data Riset Microstock. Hak Cipta Dilindungi.
+        </p>
+    </div>
+
+    <!-- Sticky CTA Mobile -->
+    <div class="sticky-cta bg-[var(--bg-card)] border-t border-royal-500/30 p-4 md:hidden" id="sticky-cta">
+        <div class="flex items-center justify-between gap-4">
+            <div>
+                <div class="text-xs text-royal-300 line-through">Rp 555.000</div>
+                <div class="font-display text-xl font-bold text-white">Rp 355.000</div>
+            </div>
+            <a href="https://ekodwilistianto.com/ekodwi.id/xp5oj89kwx98/checkout?token=cGFyYW1zPSU1QiU1RCZiaWRfcHJpY2U9MCZxdHlfcHJvZD0x" class="btn-primary py-3 px-6 rounded-lg font-bold text-sm" target="_blank">
+                Beli Sekarang
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables first
+        let lastScrollY = 0;
+        const stickyCta = document.getElementById('sticky-cta');
+        const countdownDays = document.getElementById('days');
+        const countdownHours = document.getElementById('hours');
+        const countdownMinutes = document.getElementById('minutes');
+        const countdownSeconds = document.getElementById('seconds');
+        
+        // Scroll Reveal with IntersectionObserver
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.style.animationDelay || '0s';
+                    entry.target.style.transitionDelay = delay;
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Sticky CTA on Mobile
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+            
+            if (stickyCta) {
+                if (currentScrollY > 600) {
+                    stickyCta.classList.add('visible');
+                } else {
+                    stickyCta.classList.remove('visible');
+                }
+            }
+            
+            lastScrollY = currentScrollY;
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        // FAQ Toggle
+        function toggleFaq(button) {
+            const faqItem = button.closest('.faq-item');
+            const allFaqItems = document.querySelectorAll('.faq-item');
+            
+            allFaqItems.forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('open');
+                }
+            });
+            
+            faqItem.classList.toggle('open');
+        }
+
+        // Dummy Countdown Timer - loops continuously
+        function updateCountdown() {
+            const now = new Date();
+            const timeInSeconds = Math.floor(now.getTime() / 1000);
+            
+            // Create a looping countdown that resets every 3 days
+            const loopDuration = 3 * 24 * 60 * 60; // 3 days in seconds
+            const remainingSeconds = loopDuration - (timeInSeconds % loopDuration);
+            
+            const days = Math.floor(remainingSeconds / (60 * 60 * 24));
+            const hours = Math.floor((remainingSeconds % (60 * 60 * 24)) / (60 * 60));
+            const minutes = Math.floor((remainingSeconds % (60 * 60)) / 60);
+            const seconds = remainingSeconds % 60;
+            
+            if (countdownDays) countdownDays.textContent = String(days).padStart(2, '0');
+            if (countdownHours) countdownHours.textContent = String(hours).padStart(2, '0');
+            if (countdownMinutes) countdownMinutes.textContent = String(minutes).padStart(2, '0');
+            if (countdownSeconds) countdownSeconds.textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Respect reduced motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.float-element').forEach(el => {
+                el.style.animation = 'none';
+            });
+            document.querySelectorAll('.pulse-glow').forEach(el => {
+                el.style.animation = 'none';
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
